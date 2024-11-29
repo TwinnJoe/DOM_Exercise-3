@@ -37,8 +37,8 @@ const teamMembers = [
 
 
 // Team container
-const teamContainer = document.createElement("div");
-teamContainer.className = "team-container";
+const mainSection = document.createElement("div");
+mainSection.className = "team-container";
 
 // Member cards
 teamMembers.forEach((member) => {
@@ -77,10 +77,10 @@ teamMembers.forEach((member) => {
         bio.style.display = bio.style.display === "none" ? "block" : "none";
     };
     card.appendChild(toggleBioButton);
-    teamContainer.appendChild(card);
+    mainSection.appendChild(card);
 });
 
-document.getElementById("team").appendChild(teamContainer);
+document.getElementById("team").appendChild(mainSection);
 
 // Team photo
 const teamPhotoButton = document.getElementById("show-team-photo");
