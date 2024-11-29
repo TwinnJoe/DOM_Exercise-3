@@ -119,51 +119,56 @@ document.addEventListener("DOMContentLoaded", () => {
 // Team photo
 const teamPhotoButton = document.getElementById("show-team-photo");
 const teamPhotoDiv = document.getElementById("team-photo");
+let FadedOut = false;
 
 teamPhotoButton.onclick = () => {
-    const img = document.createElement("img");
-    img.src = "https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg";
-    img.alt = "Team Photo";
-    img.style.width = "80%";
-    img.style.height = "auto";
-    img.style.borderRadius = "40px";
-    teamPhotoDiv.appendChild(img);
+    let img = document.querySelector("#teamPhotoDiv img");
 
-    let FadedOut = false;
+    if (!img) {
+        img = document.createElement("img");
+        img.src = "https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg";
+        img.alt = "Team Photo";
+        img.style.width = "80%";
+        img.style.height = "auto";
+        img.style.borderRadius = "40px";
+        img.style.opacity = "1";
+        teamPhotoDiv.appendChild(img);
+    }
 
     if (FadedOut) {
-        fadeIn();
+        fadeIn(img);
         teamPhotoButton.textContent = "Fade Out";
     } else {
-        fadeOut();
+        fadeOut(img);
         teamPhotoButton.textContent = "Fade In";
     }
-    FadedOut = !FadedOut;
-} 
+    FadedOut = !FadedOut; 
+};
 
-function fadeOut() {
-    let opacity = 1; 
+function fadeOut(img) {
+    let opacity = 1;
     const interval = setInterval(() => {
         if (opacity <= 0) {
-            clearInterval(interval); 
+            clearInterval(interval);
         } else {
             opacity -= 0.1;
             img.style.opacity = opacity;
         }
-    }, 100); 
+    }, 1000);
 }
 
-function fadeIn() {
-    let opacity = 0; 
+function fadeIn(img) {
+    let opacity = 0;
     const interval = setInterval(() => {
         if (opacity >= 1) {
-            clearInterval(interval); 
+            clearInterval(interval);
         } else {
-            opacity += 0.1; 
+            opacity += 0.1;
             img.style.opacity = opacity;
         }
-    }, 100); 
+    }, 1000);
 }
+
 
 
 
