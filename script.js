@@ -36,9 +36,23 @@ const teamMembers = [
 ];
 
 
+// DOM manipulation: Style the <h1> element
+
+const h1 = document.querySelector("h1");
+h1.style.backgroundColor = "black";
+h1.style.color = "white";
+h1.style.position = "fixed";
+h1.style.top = "0";
+h1.style.width = "100%";
+h1.style.padding = "10px";
+h1.style.textAlign = "center";
+h1.style.marginTop = "0px";
+
 // Team container
+
 const mainSection = document.createElement("div");
 mainSection.className = "team-container";
+mainSection.style.marginTop = "100px";
 
 // Member cards
 teamMembers.forEach((member) => {
@@ -82,12 +96,31 @@ teamMembers.forEach((member) => {
 
 document.getElementById("team").appendChild(mainSection);
 
+document.addEventListener("DOMContentLoaded", () => {
+    const themeSelector = document.getElementById("themeSelector");
+    const body = document.body;
+
+    themeSelector.addEventListener("change", () => {
+      const selectedTheme = themeSelector.value;
+      // Theme
+      if (selectedTheme === "light") {
+        body.style.backgroundColor = "#ffffff";
+        body.style.color = "#000000";
+      } else if (selectedTheme === "dark") {
+        body.style.backgroundColor = "#121212";
+        body.style.color = "#ffffff";
+      } else if (selectedTheme === "colorful") {
+        body.style.backgroundColor = "#ffddc1";
+        body.style.color = "#005f73";
+      }
+    });
+});
+
 // Team photo
 const teamPhotoButton = document.getElementById("show-team-photo");
 const teamPhotoDiv = document.getElementById("team-photo");
 
 teamPhotoButton.onclick = () => {
-    teamPhotoDiv.innerHTML = ""; // Clear previous content
     const img = document.createElement("img");
     img.src = "https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg";
     img.alt = "Team Photo";
@@ -96,16 +129,45 @@ teamPhotoButton.onclick = () => {
     img.style.borderRadius = "40px";
     teamPhotoDiv.appendChild(img);
 
-    if (img.style.opacity === "0" || image.style.opacity === "") {
-        // Fade In: Set opacity to 1 (visible)
-        img.style.opacity = "1";
+    let FadedOut = false;
+
+    if (FadedOut) {
+        fadeIn();
+        teamPhotoButton.textContent = "Fade Out";
     } else {
-        // Fade Out: Set opacity to 0 (hidden)
-        img.style.opacity = "0";
+        fadeOut();
+        teamPhotoButton.textContent = "Fade In";
     }
+    FadedOut = !FadedOut;
+} 
 
-}    
+function fadeOut() {
+    let opacity = 1; 
+    const interval = setInterval(() => {
+        if (opacity <= 0) {
+            clearInterval(interval); 
+        } else {
+            opacity -= 0.1;
+            img.style.opacity = opacity;
+        }
+    }, 100); 
+}
 
+function fadeIn() {
+    let opacity = 0; 
+    const interval = setInterval(() => {
+        if (opacity >= 1) {
+            clearInterval(interval); 
+        } else {
+            opacity += 0.1; 
+            img.style.opacity = opacity;
+        }
+    }, 100); 
+}
+
+
+
+        
 
 
         
